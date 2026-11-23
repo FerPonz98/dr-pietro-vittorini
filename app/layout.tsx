@@ -53,6 +53,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <script dangerouslySetInnerHTML={{ __html: "try{if(sessionStorage.getItem('intro-seen'))document.documentElement.classList.add('seen')}catch(e){}" }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(dentistLd) }} />
+        <a className="skip" href="#contenido">Saltar al contenido</a>
         <Intro />
         <Motion />
         <Header />

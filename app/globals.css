@@ -1,6 +1,6 @@
 
 :root{
-  --bg:#f7f4ee; --paper:#fffdf9; --ink:#16302d; --ink-2:#3d524f; --muted:#6f7f7c;
+  --bg:#f7f4ee; --paper:#fffdf9; --ink:#16302d; --ink-2:#3d524f; --muted:#5a6a67;
   --teal:#2f6f64; --teal-2:#4f9486; --sand:#e9dfcf; --sand-2:#f2ebe0; --line:#e2dbcf;
   --r:22px; --max:1180px;
   --serif:var(--font-fraunces),Georgia,serif; --sans:var(--font-manrope),system-ui,sans-serif;
@@ -11,6 +11,10 @@ body{font-family:var(--sans);background:var(--bg);color:var(--ink);line-height:1
 img,video{display:block;max-width:100%}
 a{color:inherit;text-decoration:none}
 button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+:focus-visible{outline:2px solid var(--teal);outline-offset:3px}
+.philo :focus-visible,.help :focus-visible,.cbox :focus-visible{outline-color:#9fd0c4}
+.skip{position:fixed;left:16px;top:12px;z-index:300;background:var(--ink);color:#fff;padding:10px 16px;border-radius:999px;font-weight:600;font-size:.9rem;transform:translateY(-200%);transition:transform .2s}
+.skip:focus{transform:none}
 .wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
 .serif{font-family:var(--serif);font-weight:400}
 .it{font-family:var(--serif);font-style:italic;font-weight:300;color:var(--teal)}
@@ -88,7 +92,8 @@ header.solid{border-color:var(--line)}
 /* before after */
 .ba-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:44px}
 .ba{border-radius:var(--r);overflow:hidden;background:var(--paper);border:1px solid var(--line)}
-.ba .cmp{position:relative;aspect-ratio:4/3;user-select:none;touch-action:none;cursor:ew-resize}
+.ba .cmp{position:relative;aspect-ratio:4/3;user-select:none;touch-action:pan-y;cursor:ew-resize}
+.ba .cmp:focus-visible{outline-offset:-3px}
 .ba .side{position:absolute;inset:0;display:flex;align-items:center;font-size:.8rem;color:var(--muted);text-align:center;padding:20px}
 .ba .before{justify-content:flex-start;padding-left:9%;background:repeating-linear-gradient(135deg,#e6ddcf 0 12px,#ede6da 12px 24px)}
 .ba .after{justify-content:flex-end;padding-right:9%;background:repeating-linear-gradient(135deg,#d7e7e2 0 12px,#e2eeea 12px 24px);clip-path:inset(0 0 0 50%)}
@@ -106,7 +111,8 @@ header.solid{border-color:var(--line)}
 .vid{background:var(--paper);border-radius:var(--r);border:1px solid var(--line);overflow:hidden}
 .vid .scr{position:relative;aspect-ratio:9/14;background:#000;cursor:pointer}
 .vid video{width:100%;height:100%;object-fit:cover}
-.vid .play{position:absolute;inset:0;display:grid;place-items:center;transition:.3s}
+.vid .play{position:absolute;inset:0;width:100%;display:grid;place-items:center;transition:opacity .3s}
+.vid .play:focus-visible{outline-offset:-4px;outline-color:#fff}
 .vid .play span{width:64px;height:64px;border-radius:50%;background:rgba(255,255,255,.92);display:grid;place-items:center}
 .vid .play svg{width:22px;margin-left:4px;color:var(--ink)}
 .vid.playing .play{opacity:0}
@@ -147,6 +153,7 @@ header.solid{border-color:var(--line)}
 /* faq */
 .faq-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:56px}
 .qa{border-bottom:1px solid var(--line)}
+.qa h3{font:inherit;letter-spacing:normal;line-height:inherit}
 .qa button{width:100%;text-align:left;display:flex;justify-content:space-between;gap:20px;padding:22px 0;font-weight:600;font-size:1.02rem}
 .qa button i{flex:none;width:26px;height:26px;border-radius:50%;border:1px solid var(--line);position:relative;transition:.3s}
 .qa button i::before,.qa button i::after{content:"";position:absolute;left:50%;top:50%;width:10px;height:1.5px;background:var(--ink);transform:translate(-50%,-50%)}
@@ -174,6 +181,7 @@ header.solid{border-color:var(--line)}
 .map{border-radius:28px;overflow:hidden;border:1px solid var(--line);position:relative;min-height:420px;background:var(--sand-2)}
 .map iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 .map .go{position:absolute;left:18px;bottom:18px;background:var(--paper);box-shadow:0 10px 30px rgba(0,0,0,.15)}
+.map .go svg{color:var(--teal)}
 
 footer{padding:44px 0 110px;border-top:1px solid var(--line);margin-top:40px;font-size:.85rem;color:var(--muted)}
 footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px}
@@ -340,6 +348,7 @@ header.hide{transform:translateY(-100%)}
 .qa button:hover{color:var(--teal)}
 
 @media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;transition-delay:0s!important}
 }
 

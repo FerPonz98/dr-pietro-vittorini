@@ -42,7 +42,7 @@ export default async function TreatmentPage({ params }: Props) {
   };
 
   return (
-    <main>
+    <main id="contenido">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd(x.faq)) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(crumbsLd) }} />
       <section className="tp-hero">

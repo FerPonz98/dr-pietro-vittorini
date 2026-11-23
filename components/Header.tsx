@@ -10,7 +10,7 @@ export default function Header() {
   return (
     <header id="top">
       <div className="wrap nav">
-        <Link className="logo" href="/" aria-label="Inicio"><span className="mk" /><span><b>Dr. Pietro Vittorini</b><small>Implantología · Estética dental</small></span></Link>
+        <Link className="logo" href="/"><span className="mk" /><span><b>Dr. Pietro Vittorini</b><small>Implantología · Estética dental</small></span></Link>
         <nav className={`links${open ? " open" : ""}`} id="links">
           {NAV.map(([h, l]) => <Link key={h} href={h} onClick={() => setOpen(false)}>{l}</Link>)}
         </nav>
