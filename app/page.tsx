@@ -56,13 +56,13 @@ export default function Home() {
               <Link className="tcard" href={`/tratamientos/${t.slug}`} key={t.slug} data-rv style={d((i % 4) * 90)}>
                 <span className="ico"><TIcon name={t.icon} /></span>
                 <small>{t.cat}</small><h3>{t.t}</h3><p>{t.short}</p>
-                <span className="more">Ver tratamiento →</span>
+                <span className="more">Ver tratamiento <span className="arr" aria-hidden>→</span></span>
               </Link>
             ))}
           </div>
           <div className="help" data-rv="scale">
             <div><h3>¿No sabes cuál necesitas?</h3><p>Es lo más común. En la valoración el doctor revisa tu caso y te explica tus opciones, sin compromiso.</p></div>
-            <WaLink className="btn" msg="Hola Dr. Pietro, no sé qué tratamiento necesito, quisiera una valoración." src="ayuda">Quiero una valoración →</WaLink>
+            <WaLink className="btn" msg="Hola Dr. Pietro, no sé qué tratamiento necesito, quisiera una valoración." src="ayuda">Quiero una valoración <span className="arr" aria-hidden>→</span></WaLink>
           </div>
         </div>
       </section>
@@ -97,17 +97,17 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="videos" style={{ paddingTop: 0 }}>
+      <section id="videos" className="pt0">
         <div className="wrap">
           <span className="kicker" data-rv>Desde el consultorio</span>
           <h2 data-rv style={d(80)}>Conócelo <span className="it">antes</span> de tu cita.</h2>
           <p className="lead" data-rv style={d(160)}>El doctor explica sus tratamientos y un paciente cuenta su experiencia. Toca un video para verlo con sonido.</p>
           <Videos />
-          <a className="ig" href={SITE.instagram} target="_blank" rel="noopener">Más videos en <span className="nw">{SITE.instagramHandle} →</span></a>
+          <a className="ig" href={SITE.instagram} target="_blank" rel="noopener">Más videos en <span className="nw">{SITE.instagramHandle} <span className="arr" aria-hidden>→</span></span></a>
         </div>
       </section>
 
-      <section style={{ paddingTop: 0 }}>
+      <section className="pt0">
         <div className="wrap train">
           <div>
             <span className="kicker" data-rv>Formación</span>
@@ -126,17 +126,18 @@ export default function Home() {
         <div className="wrap">
           <div className="rv-head">
             <div><span className="kicker" data-rv>Reseñas</span><h2 data-rv style={d(80)}>Lo que dicen <span className="it">los pacientes</span>.</h2></div>
-            <a className="qr" href={SITE.reviewUrl} target="_blank" rel="noopener" data-rv="scale"><span className="box" aria-hidden /><div><b>¿Ya te atendiste?</b><span>Déjanos tu reseña en Google →</span></div></a>
+            <a className="qr" href={SITE.reviewUrl} target="_blank" rel="noopener" data-rv="scale"><span className="box" aria-hidden /><div><b>¿Ya te atendiste?</b><span>Déjanos tu reseña en Google <span className="arr" aria-hidden>→</span></span></div></a>
           </div>
           <div className="rgrid">
             {/* Reemplazar con reseñas reales de Google */}
             {[0, 1, 2].map((i) => (
               <div className="rcard" key={i} data-rv style={d(i * 120)}>
-                <div><div className="stars" aria-hidden>★★★★★</div><p>Aquí se mostrará una reseña real de Google del consultorio.</p></div>
+                <div><span className="ph-tag">Espacio reservado</span><div className="stars" aria-hidden>★★★★★</div><p>Aquí se mostrará una reseña real de Google del consultorio.</p></div>
                 <small>Nombre del paciente · Google</small>
               </div>
             ))}
           </div>
+          <p className="note">Espacio reservado: aquí se muestran las reseñas reales del Perfil de Empresa de Google del consultorio.</p>
         </div>
       </section>
 
@@ -152,7 +153,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section style={{ paddingTop: 0 }}>
+      <section className="pt0">
         <div className="wrap faq-grid">
           <div>
             <span className="kicker" data-rv>Preguntas frecuentes</span>
@@ -163,7 +164,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="contacto" style={{ paddingTop: 0 }}>
+      <section id="contacto" className="pt0">
         <div className="wrap contact">
           <div className="cbox" data-rv="left">
             <span className="kicker">Contacto</span>

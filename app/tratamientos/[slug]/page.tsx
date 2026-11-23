@@ -71,7 +71,7 @@ export default async function TreatmentPage({ params }: Props) {
               </div>
               <div>
                 <h2 data-rv>Otros <span className="it">tratamientos</span></h2>
-                <div className="related">{others.map((o, i) => <Link key={o.slug} href={`/tratamientos/${o.slug}`} data-rv style={d(i * 60)}>{o.t}<span>→</span></Link>)}</div>
+                <div className="related">{others.map((o, i) => <Link key={o.slug} href={`/tratamientos/${o.slug}`} data-rv style={d(i * 60)}>{o.t}<span className="arr" aria-hidden>→</span></Link>)}</div>
               </div>
             </div>
             <aside className="side-card hero-in" style={d(500)}>
