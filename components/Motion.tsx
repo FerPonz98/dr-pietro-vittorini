@@ -82,6 +82,7 @@ export default function Motion() {
         const y = scrollY; const max = document.documentElement.scrollHeight - innerHeight;
         bar?.style.setProperty("--p", String(max > 0 ? y / max : 0));
         hdr?.classList.toggle("solid", y > 20);
+        document.documentElement.classList.toggle("float-on", y > innerHeight * 0.6);
         hdr?.classList.toggle("hide", y > 400 && y > last && !document.documentElement.classList.contains("menu-open"));
         last = y;
       });

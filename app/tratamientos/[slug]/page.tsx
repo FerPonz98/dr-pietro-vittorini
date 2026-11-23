@@ -75,7 +75,7 @@ export default async function TreatmentPage({ params }: Props) {
               </div>
             </div>
             <aside className="side-card hero-in" style={d(500)}>
-              <h3>Consulta por {x.t.toLowerCase()}</h3>
+              <h3>Consulta por {x.t.charAt(0).toLowerCase() + x.t.slice(1)}</h3>
               <p>Escríbele al doctor con el mensaje ya listo. Te responde y coordinan tu valoración.</p>
               <WaLink className="btn btn-wa" msg={`Hola Dr. Pietro, quisiera información sobre: ${x.t}.`} src="pagina-tratamiento" t={x.t}><WaIcon /> Consultar por WhatsApp</WaLink>
               <ul><li>Valoración personalizada</li><li>Plan y presupuesto claros</li><li>Formación especializada en Brasil</li></ul>

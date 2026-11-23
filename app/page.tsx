@@ -103,7 +103,7 @@ export default function Home() {
           <h2 data-rv style={d(80)}>Conócelo <span className="it">antes</span> de tu cita.</h2>
           <p className="lead" data-rv style={d(160)}>El doctor explica sus tratamientos y un paciente cuenta su experiencia. Toca un video para verlo con sonido.</p>
           <Videos />
-          <a className="ig" href={SITE.instagram} target="_blank" rel="noopener">Más videos en {SITE.instagramHandle} →</a>
+          <a className="ig" href={SITE.instagram} target="_blank" rel="noopener">Más videos en <span className="nw">{SITE.instagramHandle} →</span></a>
         </div>
       </section>
 
