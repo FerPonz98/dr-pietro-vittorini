@@ -342,6 +342,8 @@ body.locked{overflow:hidden}
 .js:not(.ready) .split .w>span{transform:translateY(105%)}
 .hero-in{transition:opacity 1s var(--ease),transform 1s var(--ease);transition-delay:var(--d,0s)}
 .js:not(.ready) .hero-in{opacity:0;transform:translateY(20px)}
+/* El párrafo principal es el LCP: se pinta de inmediato (Chrome espera a que termine cualquier animación suya) */
+.js:not(.ready) .lead.hero-in{opacity:1;transform:none}
 .portrait .ph{clip-path:inset(0 0 0 0 round 200px 200px 22px 22px);transition:clip-path 1.4s var(--ease) .25s}
 .js:not(.ready) .portrait .ph{clip-path:inset(100% 0 0 0 round 200px 200px 22px 22px)}
 .portrait .ph img{transition:transform 2s var(--ease) .25s}

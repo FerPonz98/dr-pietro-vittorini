@@ -35,7 +35,7 @@ export default function Home() {
           </div>
           <div className="portrait">
             <div className="ph">
-              <Image src="/img/dr-pietro-consultorio.jpg" alt="Dr. Pietro Vittorini Sangüeza en su consultorio de Cochabamba" width={900} height={1350} priority sizes="(max-width: 980px) 100vw, 45vw" />
+              <Image src="/img/dr-pietro-consultorio.jpg" alt="Dr. Pietro Vittorini Sangüeza en su consultorio de Cochabamba" width={900} height={1350} priority sizes="(max-width: 560px) calc(100vw - 48px), (max-width: 980px) 520px, 500px" />
             </div>
             <div className="badge"><span className="flag" /><div><b>{SITE.name}</b><span>Cirujano dentista · Implantólogo</span></div></div>
           </div>
@@ -70,7 +70,7 @@ export default function Home() {
       <section className="philo">
         <div className="wrap philo-grid">
           <div className="ph" data-rv="clip">
-            <Image src="/img/dr-pietro-retrato.jpg" alt="Dr. Pietro Vittorini con instrumental dental" width={567} height={1000} sizes="(max-width: 980px) 100vw, 40vw" />
+            <Image src="/img/dr-pietro-retrato.jpg" alt="Dr. Pietro Vittorini con instrumental dental" width={567} height={1000} sizes="(max-width: 560px) calc(100vw - 80px), (max-width: 980px) 480px, 460px" />
           </div>
           <div>
             <span className="kicker" data-rv>Filosofía de trabajo</span>
