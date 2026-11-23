@@ -1,10 +1,12 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
+import Link from "next/link";
 import Script from "next/script";
 import "./globals.css";
 import Header from "@/components/Header";
 import Intro from "@/components/Intro";
 import Motion from "@/components/Motion";
+import TrackLink from "@/components/TrackLink";
 import WaLink from "@/components/WaLink";
 import { WaIcon } from "@/components/Icons";
 import { SITE, TREATMENTS } from "@/lib/data";
@@ -18,6 +20,10 @@ const fraunces = localFont({
 });
 const manrope = localFont({ src: "./fonts/manrope-latin-wght-normal.woff2", weight: "200 800", variable: "--font-manrope", display: "swap" });
 
+// Solo IDs con formato válido: el valor se inserta en un script inline
+const GA_ID = /^G-[A-Z0-9]+$/.test(process.env.NEXT_PUBLIC_GA_ID ?? "") ? process.env.NEXT_PUBLIC_GA_ID! : "";
+const GSC = process.env.NEXT_PUBLIC_GSC_VERIFICATION?.trim();
+
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
   title: { default: SITE.title, template: "%s · Dr. Pietro Vittorini" },
@@ -28,6 +34,7 @@ export const metadata: Metadata = {
     description: "Sonrisas naturales que también funcionan. Agenda tu valoración por WhatsApp.",
     images: [{ url: "/og-image.jpg", width: 1200, height: 630 }],
   },
+  ...(GSC ? { verification: { google: GSC } } : {}),
 };
 export const viewport: Viewport = { themeColor: "#16302d" };
 
@@ -55,13 +62,16 @@ const dentistLd = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  const ga = process.env.NEXT_PUBLIC_GA_ID;
   return (
     <html lang="es" suppressHydrationWarning className={`${fraunces.variable} ${manrope.variable}`}>
       <body>
         <link rel="preload" href="/img/logo-blanco.png" as="image" crossOrigin="anonymous" fetchPriority="high" />
         <script dangerouslySetInnerHTML={{ __html: BOOT }} />
         <noscript><style>{".intro{display:none}"}</style></noscript>
+        {GA_ID && (
+          // gtag definido antes de hidratar: los eventos tempranos quedan en cola en dataLayer
+          <script dangerouslySetInnerHTML={{ __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}window.gtag=gtag;gtag('js',new Date());gtag('config','${GA_ID}');` }} />
+        )}
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(dentistLd) }} />
         <a className="skip" href="#contenido">Saltar al contenido</a>
         <Intro />
@@ -71,16 +81,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <footer>
           <div className="wrap">
             <span>© {new Date().getFullYear()} {SITE.name} · Implantología y Estética Dental · {SITE.city}</span>
-            <span>Diseño web por <a href={SITE.author.url} target="_blank" rel="noopener">{SITE.author.name}</a></span>
+            <span><Link href="/privacidad">Privacidad</Link> · Diseño web por <TrackLink href={SITE.author.url} target="_blank" rel="noopener" event="click_credito_web">{SITE.author.name}</TrackLink></span>
           </div>
         </footer>
         <WaLink className="float" msg="Hola Dr. Pietro, quisiera información." src="flotante" ariaLabel="Escribir por WhatsApp"><WaIcon /><b>WhatsApp</b></WaLink>
-        {ga && (
-          <>
-            <Script src={`https://www.googletagmanager.com/gtag/js?id=${ga}`} strategy="afterInteractive" />
-            <Script id="ga" strategy="afterInteractive">{`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}window.gtag=gtag;gtag('js',new Date());gtag('config','${ga}');`}</Script>
-          </>
-        )}
+        {GA_ID && <Script src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`} strategy="afterInteractive" />}
       </body>
     </html>
   );

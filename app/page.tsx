@@ -5,6 +5,7 @@ import FaqList from "@/components/FaqList";
 import HashLink from "@/components/HashLink";
 import Split from "@/components/Split";
 import Videos from "@/components/Videos";
+import TrackLink from "@/components/TrackLink";
 import WaLink from "@/components/WaLink";
 import { TIcon, WaIcon } from "@/components/Icons";
 import { GENERAL_FAQ, SITE, TREATMENTS, faqJsonLd } from "@/lib/data";
@@ -103,7 +104,7 @@ export default function Home() {
           <h2 data-rv style={d(80)}>Conócelo <span className="it">antes</span> de tu cita.</h2>
           <p className="lead" data-rv style={d(160)}>El doctor explica sus tratamientos y un paciente cuenta su experiencia. Toca un video para verlo con sonido.</p>
           <Videos />
-          <a className="ig" href={SITE.instagram} target="_blank" rel="noopener">Más videos en <span className="nw">{SITE.instagramHandle} <span className="arr" aria-hidden>→</span></span></a>
+          <TrackLink className="ig" href={SITE.instagram} target="_blank" rel="noopener" event="click_instagram" params={{ origen: "videos" }}>Más videos en <span className="nw">{SITE.instagramHandle} <span className="arr" aria-hidden>→</span></span></TrackLink>
         </div>
       </section>
 
@@ -126,7 +127,7 @@ export default function Home() {
         <div className="wrap">
           <div className="rv-head">
             <div><span className="kicker" data-rv>Reseñas</span><h2 data-rv style={d(80)}>Lo que dicen <span className="it">los pacientes</span>.</h2></div>
-            <a className="qr" href={SITE.reviewUrl} target="_blank" rel="noopener" data-rv="scale"><span className="box" aria-hidden /><div><b>¿Ya te atendiste?</b><span>Déjanos tu reseña en Google <span className="arr" aria-hidden>→</span></span></div></a>
+            <TrackLink className="qr" href={SITE.reviewUrl} target="_blank" rel="noopener" data-rv="scale" event="click_resena"><span className="box" aria-hidden /><div><b>¿Ya te atendiste?</b><span>Déjanos tu reseña en Google <span className="arr" aria-hidden>→</span></span></div></TrackLink>
           </div>
           <div className="rgrid">
             {/* Reemplazar con reseñas reales de Google */}
@@ -172,13 +173,13 @@ export default function Home() {
             <div className="clist">
               <WaLink msg="Hola Dr. Pietro, quisiera agendar una cita." src="contacto"><span className="ic"><WaIcon /></span><span><small>WhatsApp</small>{SITE.phoneLabel}</span></WaLink>
               <div><span className="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z" /><circle cx="12" cy="9.5" r="2.5" /></svg></span><span><small>Consultorio</small>{SITE.city}</span></div>
-              <a href={SITE.instagram} target="_blank" rel="noopener"><span className="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden><rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.5" cy="6.5" r="1" fill="currentColor" /></svg></span><span><small>Instagram</small>{SITE.instagramHandle}</span></a>
+              <TrackLink href={SITE.instagram} target="_blank" rel="noopener" event="click_instagram" params={{ origen: "contacto" }}><span className="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden><rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.5" cy="6.5" r="1" fill="currentColor" /></svg></span><span><small>Instagram</small>{SITE.instagramHandle}</span></TrackLink>
             </div>
             <WaLink className="btn" msg="Hola Dr. Pietro, quisiera agendar una cita." src="contacto-btn"><WaIcon /> Escribir por WhatsApp</WaLink>
           </div>
           <div className="map" data-rv="right">
             <iframe title="Ubicación del consultorio" loading="lazy" referrerPolicy="no-referrer-when-downgrade" src={`https://www.google.com/maps?q=${encodeURIComponent(SITE.mapQuery)}&output=embed`} />
-            <a className="btn go" href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(SITE.mapQuery)}`} target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z" /><circle cx="12" cy="9.5" r="2.5" /></svg> Cómo llegar</a>
+            <TrackLink className="btn go" href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(SITE.mapQuery)}`} target="_blank" rel="noopener" event="click_como_llegar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z" /><circle cx="12" cy="9.5" r="2.5" /></svg> Cómo llegar</TrackLink>
           </div>
         </div>
       </section>

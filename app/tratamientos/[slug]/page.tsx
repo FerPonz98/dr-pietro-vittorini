@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import FaqList from "@/components/FaqList";
 import HashLink from "@/components/HashLink";
+import TrackView from "@/components/TrackView";
 import Split from "@/components/Split";
 import WaLink from "@/components/WaLink";
 import { WaIcon } from "@/components/Icons";
@@ -46,6 +47,7 @@ export default async function TreatmentPage({ params }: Props) {
     <main id="contenido">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd(x.faq)) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(crumbsLd) }} />
+      <TrackView event="ver_tratamiento" params={{ tratamiento: x.t }} />
       <section className="tp-hero">
         <div className="wrap">
           <nav className="crumbs hero-in" aria-label="Migas de pan"><Link href="/">Inicio</Link> <span aria-hidden>/</span> <HashLink href="/#tratamientos">Tratamientos</HashLink> <span aria-hidden>/</span> <span aria-current="page">{x.t}</span></nav>

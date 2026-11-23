@@ -6,6 +6,7 @@ import HashLink from "./HashLink";
 import WaLink from "./WaLink";
 import { WaIcon } from "./Icons";
 import { SITE } from "@/lib/data";
+import { track } from "@/lib/track";
 
 const NAV = [["/#tratamientos", "Tratamientos"], ["/#casos", "Antes y después"], ["/#videos", "Videos"], ["/#resenas", "Reseñas"], ["/#contacto", "Contacto"]];
 
@@ -57,7 +58,7 @@ export default function Header() {
         </nav>
         <div className="mfoot" style={{ ["--i" as string]: NAV.length }}>
           <WaLink className="btn btn-wa" msg="Hola Dr. Pietro, quisiera agendar una valoración." src="menu-movil"><WaIcon /> Agendar valoración</WaLink>
-          <p><span>{SITE.city}</span><a href={SITE.instagram} target="_blank" rel="noopener" onClick={close}>{SITE.instagramHandle}</a></p>
+          <p><span>{SITE.city}</span><a href={SITE.instagram} target="_blank" rel="noopener" onClick={() => { track("click_instagram", { origen: "menu-movil" }); close(); }}>{SITE.instagramHandle}</a></p>
         </div>
       </div>
     </>

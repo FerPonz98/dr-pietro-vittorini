@@ -1,6 +1,7 @@
 "use client";
 import { useId, useState } from "react";
 import type { Faq } from "@/lib/data";
+import { track } from "@/lib/track";
 
 export default function FaqList({ items }: { items: Faq[] }) {
   const [open, setOpen] = useState(0);
@@ -10,7 +11,7 @@ export default function FaqList({ items }: { items: Faq[] }) {
       {items.map(([q, a], i) => (
         <div className={`qa${open === i ? " open" : ""}`} key={q} data-rv style={{ ["--d" as string]: `${i * 60}ms` }}>
           <h3>
-            <button type="button" id={`${uid}-q${i}`} aria-expanded={open === i} aria-controls={`${uid}-a${i}`} onClick={() => setOpen(open === i ? -1 : i)}>
+            <button type="button" id={`${uid}-q${i}`} aria-expanded={open === i} aria-controls={`${uid}-a${i}`} onClick={() => { if (open === i) setOpen(-1); else { setOpen(i); track("faq_abierta", { pregunta: q }); } }}>
               {q}<i aria-hidden />
             </button>
           </h3>
