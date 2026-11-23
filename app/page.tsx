@@ -27,7 +27,7 @@ export default function Home() {
               <Link className="btn btn-ghost" href="#tratamientos">Ver tratamientos</Link>
             </div>
             <div className="facts hero-in" style={d(950)}>
-              <div><b data-count="8">0</b>tratamientos</div>
+              <div><b data-count={TREATMENTS.length}>{TREATMENTS.length}</b>tratamientos</div>
               <div><b>Brasil</b>formación especializada</div>
               <div><b>1 a 1</b>con el doctor</div>
             </div>

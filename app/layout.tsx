@@ -31,6 +31,13 @@ export const metadata: Metadata = {
 };
 export const viewport: Viewport = { themeColor: "#16302d" };
 
+// Corre antes de pintar: marca que hay JS, salta la intro si ya se vio (o con reduced-motion)
+// y libera el contenido aunque el bundle tarde o falle.
+const BOOT = `(function(){var d=document.documentElement,ready=function(){d.classList.add('ready')};d.classList.add('js');
+var skip=matchMedia('(prefers-reduced-motion: reduce)').matches;try{skip=skip||!!sessionStorage.getItem('intro-seen')}catch(e){skip=true}
+if(skip){d.classList.add('seen');requestAnimationFrame(function(){requestAnimationFrame(ready)})}
+setTimeout(function(){if(!d.classList.contains('mo')){d.classList.remove('js');d.classList.add('seen');ready()}},6000)})()`;
+
 const dentistLd = {
   "@context": "https://schema.org",
   "@type": "Dentist",
@@ -51,7 +58,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="es" suppressHydrationWarning className={`${fraunces.variable} ${manrope.variable}`}>
       <body>
-        <script dangerouslySetInnerHTML={{ __html: "try{if(sessionStorage.getItem('intro-seen'))document.documentElement.classList.add('seen')}catch(e){}" }} />
+        <link rel="preload" href="/img/logo-blanco.png" as="image" fetchPriority="high" />
+        <script dangerouslySetInnerHTML={{ __html: BOOT }} />
+        <noscript><style>{".intro{display:none}"}</style></noscript>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(dentistLd) }} />
         <a className="skip" href="#contenido">Saltar al contenido</a>
         <Intro />

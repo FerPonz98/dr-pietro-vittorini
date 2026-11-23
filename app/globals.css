@@ -23,6 +23,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 h1,h2,h3{font-family:var(--serif);font-weight:350;letter-spacing:-.01em;line-height:1.08}
 h2{font-size:clamp(2rem,4.2vw,3.2rem);margin:14px 0 16px}
 .lead{color:var(--ink-2);font-size:1.06rem;max-width:560px}
+main{overflow-x:clip}
 section{padding:96px 0}
 .btn{display:inline-flex;align-items:center;gap:10px;padding:15px 24px;border-radius:999px;font-weight:600;font-size:.95rem;transition:.25s}
 .btn-wa{background:var(--ink);color:#fff}
@@ -247,7 +248,9 @@ footer a{color:var(--ink);font-weight:600}
 /* Intro / splash */
 .intro{position:fixed;inset:0;z-index:200;background:var(--ink);display:grid;place-items:center;color:#fff;
   transition:clip-path 1s var(--ease);clip-path:inset(0 0 0 0)}
-.intro.out{clip-path:inset(0 0 100% 0)}
+.intro.out{clip-path:inset(0 0 100% 0);pointer-events:none}
+.intro .stage{transition:opacity .5s ease,transform 1s var(--ease)}
+.intro.out .stage{opacity:0;transform:translateY(-24px)}
 .intro .stage{display:flex;flex-direction:column;align-items:center;gap:22px}
 .intro .ring{position:relative;width:120px;height:120px}
 .intro .ring svg{position:absolute;inset:0;transform:rotate(-90deg)}
@@ -267,28 +270,29 @@ footer a{color:var(--ink);font-weight:600}
 body.locked{overflow:hidden}
 
 /* Scroll reveal */
-[data-rv]{opacity:0;transform:translateY(28px);transition:opacity .9s var(--ease),transform .9s var(--ease);transition-delay:var(--d,0s)}
-[data-rv].in{opacity:1;transform:none}
-[data-rv="left"]{transform:translateX(-36px)}
-[data-rv="right"]{transform:translateX(36px)}
-[data-rv="scale"]{transform:scale(.94)}
-[data-rv="clip"]{opacity:1;transform:none;clip-path:inset(12% 12% 12% 12% round 28px);transition:clip-path 1.3s var(--ease)}
-[data-rv="clip"].in{clip-path:inset(0 0 0 0 round 0)}
-[data-rv="clip"] img{transform:scale(1.18);transition:transform 1.6s var(--ease)}
-[data-rv="clip"].in img{transform:scale(1)}
+[data-rv]{transition:opacity .9s var(--ease),transform .9s var(--ease);transition-delay:var(--d,0s)}
+.js [data-rv]:not(.in){opacity:0;transform:translateY(28px)}
+[data-rv].done{transition-delay:0s}
+.js [data-rv="left"]:not(.in){transform:translateX(-36px)}
+.js [data-rv="right"]:not(.in){transform:translateX(36px)}
+.js [data-rv="scale"]:not(.in){transform:scale(.94)}
+[data-rv="clip"]{transition:clip-path 1.3s var(--ease)}
+.js [data-rv="clip"]:not(.in){opacity:1;transform:none;clip-path:inset(12% 12% 12% 12% round 28px)}
+[data-rv="clip"] img{transition:transform 1.6s var(--ease)}
+.js [data-rv="clip"]:not(.in) img{transform:scale(1.18)}
 
 /* Split words (hero titles) */
 .split .w{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.08em;margin-bottom:-.08em}
-.split .w>span{display:inline-block;transform:translateY(105%);transition:transform 1s var(--ease);transition-delay:calc(var(--i)*70ms + var(--base,0ms))}
-.ready .split .w>span,.split.in .w>span{transform:none}
-.hero-in{opacity:0;transform:translateY(20px);transition:opacity 1s var(--ease),transform 1s var(--ease);transition-delay:var(--d,0s)}
-.ready .hero-in{opacity:1;transform:none}
-.portrait .ph{clip-path:inset(100% 0 0 0 round 200px 200px 22px 22px);transition:clip-path 1.4s var(--ease) .25s}
-.ready .portrait .ph{clip-path:inset(0 0 0 0 round 200px 200px 22px 22px)}
-.portrait .ph img{transform:scale(1.25);transition:transform 2s var(--ease) .25s}
-.ready .portrait .ph img{transform:scale(1)}
-.badge{opacity:0;transform:translateY(20px) scale(.96);transition:all .9s var(--ease) 1.1s}
-.ready .badge{opacity:1;transform:none}
+.split .w>span{display:inline-block;transition:transform 1s var(--ease);transition-delay:calc(var(--i)*70ms + var(--base,0ms))}
+.js:not(.ready) .split .w>span{transform:translateY(105%)}
+.hero-in{transition:opacity 1s var(--ease),transform 1s var(--ease);transition-delay:var(--d,0s)}
+.js:not(.ready) .hero-in{opacity:0;transform:translateY(20px)}
+.portrait .ph{clip-path:inset(0 0 0 0 round 200px 200px 22px 22px);transition:clip-path 1.4s var(--ease) .25s}
+.js:not(.ready) .portrait .ph{clip-path:inset(100% 0 0 0 round 200px 200px 22px 22px)}
+.portrait .ph img{transition:transform 2s var(--ease) .25s}
+.js:not(.ready) .portrait .ph img{transform:scale(1.25)}
+.badge{transition:opacity .9s var(--ease) 1.1s,transform .9s var(--ease) 1.1s}
+.js:not(.ready) .badge{opacity:0;transform:translateY(20px) scale(.96)}
 
 /* Scroll progress */
 .progress{position:fixed;top:0;left:0;right:0;height:2px;z-index:70;background:var(--teal);transform-origin:left;transform:scaleX(var(--p,0))}
@@ -327,15 +331,15 @@ header.hide{transform:translateY(-100%)}
 /* Floating WhatsApp pulse */
 .float::after{content:"";position:absolute;inset:0;border-radius:inherit;border:2px solid #25d366;animation:pulse 2.4s ease-out infinite;z-index:-1}
 @keyframes pulse{0%{transform:scale(1);opacity:.8}100%{transform:scale(1.35);opacity:0}}
-.float{transform:translateY(120px);transition:transform .8s var(--ease) 1.6s}
-.ready .float{transform:none}
+.float{transition:transform .6s var(--ease),opacity .4s}
+.js:not(.ready) .float{transform:translateY(120px)}
 
 /* Counters & parallax */
 [data-parallax]{will-change:transform}
 
 /* Page transition */
-.page-enter{animation:pageIn .8s var(--ease) both}
-@keyframes pageIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+.page-enter{animation:pageIn .6s var(--ease) both}
+@keyframes pageIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
 
 /* Video hover */
 .vid{transition:transform .6s var(--ease),box-shadow .6s var(--ease)}

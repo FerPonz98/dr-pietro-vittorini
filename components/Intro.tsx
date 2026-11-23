@@ -3,22 +3,19 @@ import { useEffect, useState } from "react";
 
 const NAME = "Dr. Pietro Vittorini";
 
+/** Intro con el logo. Se muestra una vez por sesión; el script BOOT de layout.tsx la oculta antes de pintar si ya se vio. */
 export default function Intro() {
   const [state, setState] = useState<"show" | "out" | "gone">("show");
 
   useEffect(() => {
-    const seen = sessionStorage.getItem("intro-seen");
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (seen || reduce) {
-      setState("gone");
-      document.body.classList.add("ready");
-      return;
-    }
+    const html = document.documentElement;
+    if (html.classList.contains("seen")) { setState("gone"); return; }
+    try { sessionStorage.setItem("intro-seen", "1"); } catch {}
     document.body.classList.add("locked");
     const t1 = setTimeout(() => setState("out"), 2300);
-    const t2 = setTimeout(() => { document.body.classList.add("ready"); document.body.classList.remove("locked"); }, 2500);
-    const t3 = setTimeout(() => { setState("gone"); sessionStorage.setItem("intro-seen", "1"); }, 3400);
-    return () => { clearTimeout(t1); clearTimeout(t2); clearTimeout(t3); };
+    const t2 = setTimeout(() => { html.classList.add("ready"); document.body.classList.remove("locked"); }, 2450);
+    const t3 = setTimeout(() => { setState("gone"); html.classList.add("seen"); }, 3400);
+    return () => { clearTimeout(t1); clearTimeout(t2); clearTimeout(t3); document.body.classList.remove("locked"); };
   }, []);
 
   if (state === "gone") return null;
@@ -31,7 +28,7 @@ export default function Intro() {
         </div>
         <div className="name">
           {NAME.split("").map((c, i) => (
-            <span key={i} style={{ animationDelay: `${0.8 + i * 0.035}s` }}>{c === " " ? " " : c}</span>
+            <span key={i} style={{ animationDelay: `${0.8 + i * 0.035}s` }}>{c === " " ? " " : c}</span>
           ))}
         </div>
         <div className="sub">Implantología · Estética dental</div>
