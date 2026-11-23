@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 
 const NAME = "Dr. Pietro Vittorini";
 
-/** Intro con el logo. Se muestra una vez por sesión; el script BOOT de layout.tsx la oculta antes de pintar si ya se vio. */
+/** Intro con el logo. Solo en el inicio y una vez por sesión; el script BOOT de layout.tsx la oculta antes de pintar en los demás casos. */
 export default function Intro() {
   const [state, setState] = useState<"show" | "out" | "gone">("show");
 

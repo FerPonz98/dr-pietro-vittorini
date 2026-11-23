@@ -31,10 +31,11 @@ export const metadata: Metadata = {
 };
 export const viewport: Viewport = { themeColor: "#16302d" };
 
-// Corre antes de pintar: marca que hay JS, salta la intro si ya se vio (o con reduced-motion)
+// Corre antes de pintar: marca que hay JS, salta la intro si ya se vio, si no es el inicio
+// (quien llega desde Google a un tratamiento va directo al contenido) o con reduced-motion,
 // y libera el contenido aunque el bundle tarde o falle.
 const BOOT = `(function(){var d=document.documentElement,ready=function(){d.classList.add('ready')};d.classList.add('js');
-var skip=matchMedia('(prefers-reduced-motion: reduce)').matches;try{skip=skip||!!sessionStorage.getItem('intro-seen')}catch(e){skip=true}
+var skip=location.pathname!=='/'||matchMedia('(prefers-reduced-motion: reduce)').matches;try{skip=skip||!!sessionStorage.getItem('intro-seen')}catch(e){skip=true}
 if(skip){d.classList.add('seen');requestAnimationFrame(function(){requestAnimationFrame(ready)})}
 setTimeout(function(){if(!d.classList.contains('mo')){d.classList.remove('js');d.classList.add('seen');ready()}},6000)})()`;
 
