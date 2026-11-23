@@ -20,15 +20,17 @@ export default function Motion() {
 
   useEffect(() => {
     document.documentElement.classList.add("mo");
-    const pending = new Set(document.querySelectorAll<HTMLElement>("[data-rv]:not(.in)"));
+    const pending = new Set(document.querySelectorAll<HTMLElement>("[data-rv]:not([data-in])"));
     const show = (el: HTMLElement) => {
-      if (el.classList.contains("in")) return;
-      el.classList.add("in");
+      if (el.hasAttribute("data-in")) return;
+      // Atributos y no clases: React reescribe className al cambiar de estado (p. ej. un video
+      // que pasa a "playing") y borraría la marca, ocultando de nuevo el elemento.
+      el.setAttribute("data-in", "");
       pending.delete(el);
       io.unobserve(el);
       // Tras el reveal se quita el retraso para que el hover responda al instante
       const ms = 1700 + (parseFloat(getComputedStyle(el).transitionDelay) || 0) * 1000;
-      setTimeout(() => el.classList.add("done"), ms);
+      setTimeout(() => el.setAttribute("data-done", ""), ms);
     };
     const io = new IntersectionObserver(
       (es) => es.forEach((e) => { if (e.isIntersecting) show(e.target as HTMLElement); }),

@@ -325,16 +325,16 @@ body.locked{overflow:hidden}
 
 /* Scroll reveal */
 [data-rv]{transition:opacity .9s var(--ease),transform .9s var(--ease)}
-.js [data-rv]:not(.in){opacity:0;transform:translateY(28px)}
+.js [data-rv]:not([data-in]){opacity:0;transform:translateY(28px)}
 /* el retraso escalonado solo aplica al reveal; después el hover responde al instante */
-[data-rv]:not(.done){transition-delay:var(--d,0s)}
-.js [data-rv="left"]:not(.in){transform:translateX(-36px)}
-.js [data-rv="right"]:not(.in){transform:translateX(36px)}
-.js [data-rv="scale"]:not(.in){transform:scale(.94)}
+[data-rv]:not([data-done]){transition-delay:var(--d,0s)}
+.js [data-rv="left"]:not([data-in]){transform:translateX(-36px)}
+.js [data-rv="right"]:not([data-in]){transform:translateX(36px)}
+.js [data-rv="scale"]:not([data-in]){transform:scale(.94)}
 [data-rv="clip"]{transition:clip-path 1.3s var(--ease)}
-.js [data-rv="clip"]:not(.in){opacity:1;transform:none;clip-path:inset(12% 12% 12% 12% round 28px)}
+.js [data-rv="clip"]:not([data-in]){opacity:1;transform:none;clip-path:inset(12% 12% 12% 12% round 28px)}
 [data-rv="clip"] img{transition:transform 1.6s var(--ease)}
-.js [data-rv="clip"]:not(.in) img{transform:scale(1.18)}
+.js [data-rv="clip"]:not([data-in]) img{transform:scale(1.18)}
 
 /* Split words (hero titles) */
 .split .w{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.08em;margin-bottom:-.08em}
