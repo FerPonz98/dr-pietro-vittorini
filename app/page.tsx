@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import BeforeAfter from "@/components/BeforeAfter";
 import FaqList from "@/components/FaqList";
+import HashLink from "@/components/HashLink";
 import Split from "@/components/Split";
 import Videos from "@/components/Videos";
 import WaLink from "@/components/WaLink";
@@ -24,7 +25,7 @@ export default function Home() {
             <p className="lead hero-in" style={d(650)}>Implantes, carillas y rehabilitación oral planificados a la medida de tu rostro y tu mordida. Sin tratamientos innecesarios y con un plan claro desde la primera cita.</p>
             <div className="cta-row hero-in" style={d(800)}>
               <WaLink className="btn btn-wa" msg="Hola Dr. Pietro, quisiera agendar una valoración." src="hero"><WaIcon /> Agenda tu valoración</WaLink>
-              <Link className="btn btn-ghost" href="#tratamientos">Ver tratamientos</Link>
+              <HashLink className="btn btn-ghost" href="/#tratamientos">Ver tratamientos</HashLink>
             </div>
             <div className="facts hero-in" style={d(950)}>
               <div><b data-count={TREATMENTS.length}>{TREATMENTS.length}</b>tratamientos</div>

@@ -1,10 +1,22 @@
 "use client";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
+import { scrollToId } from "./HashLink";
 import { usePathname } from "next/navigation";
 
 /** Reveal al hacer scroll, barra de progreso, header que se oculta y contadores. */
 export default function Motion() {
   const path = usePathname();
+  const first = useRef(true);
+
+  // Navegación desde otra página a "/#seccion": arranca arriba y baja con scroll suave
+  useEffect(() => {
+    if (first.current) { first.current = false; return; }
+    const id = decodeURIComponent(location.hash.slice(1));
+    if (!id) return;
+    scrollTo({ top: 0, behavior: "instant" });
+    const t = setTimeout(() => scrollToId(id), 350);
+    return () => clearTimeout(t);
+  }, [path]);
 
   useEffect(() => {
     document.documentElement.classList.add("mo");

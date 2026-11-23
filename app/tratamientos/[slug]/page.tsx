@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import FaqList from "@/components/FaqList";
+import HashLink from "@/components/HashLink";
 import Split from "@/components/Split";
 import WaLink from "@/components/WaLink";
 import { WaIcon } from "@/components/Icons";
@@ -47,7 +48,7 @@ export default async function TreatmentPage({ params }: Props) {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(crumbsLd) }} />
       <section className="tp-hero">
         <div className="wrap">
-          <div className="crumbs hero-in"><Link href="/">Inicio</Link> / <Link href="/#tratamientos">Tratamientos</Link> / {x.t}</div>
+          <nav className="crumbs hero-in" aria-label="Migas de pan"><Link href="/">Inicio</Link> <span aria-hidden>/</span> <HashLink href="/#tratamientos">Tratamientos</HashLink> <span aria-hidden>/</span> <span aria-current="page">{x.t}</span></nav>
           <div className="tp-grid">
             <div className="blocks">
               <div>
