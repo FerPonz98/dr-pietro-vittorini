@@ -13,7 +13,7 @@ export const SITE = {
   mapQuery: "Cochabamba, Bolivia",
   // Reemplazar con el enlace real de reseñas del Perfil de Empresa de Google
   reviewUrl: "https://g.page/r/REEMPLAZAR/review",
-  author: { name: "Fernando Ponz", url: "https://wa.me/59177108880" },
+  author: { name: "FerPonz", url: "https://wa.me/59177108880" },
 };
 
 export const waLink = (msg: string) =>

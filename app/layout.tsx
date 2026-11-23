@@ -81,7 +81,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <footer>
           <div className="wrap">
             <span>© {new Date().getFullYear()} {SITE.name} · Implantología y Estética Dental · {SITE.city}</span>
-            <span><Link href="/privacidad">Privacidad</Link> · Diseño web por <TrackLink href={SITE.author.url} target="_blank" rel="noopener" event="click_credito_web">{SITE.author.name}</TrackLink></span>
+            <span><Link href="/privacidad">Privacidad</Link> · Diseño por <TrackLink href={SITE.author.url} target="_blank" rel="noopener" event="click_credito_web">{SITE.author.name}</TrackLink></span>
           </div>
         </footer>
         <WaLink className="float" msg="Hola Dr. Pietro, quisiera información." src="flotante" ariaLabel="Escribir por WhatsApp"><WaIcon /><b>WhatsApp</b></WaLink>
