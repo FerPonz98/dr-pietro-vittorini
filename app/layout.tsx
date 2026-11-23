@@ -71,7 +71,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <footer>
           <div className="wrap">
             <span>© {new Date().getFullYear()} {SITE.name} · Implantología y Estética Dental · {SITE.city}</span>
-            <span>Sitio por <a href={SITE.author.url} target="_blank" rel="noopener">{SITE.author.name}</a></span>
+            <span>Diseño web por <a href={SITE.author.url} target="_blank" rel="noopener">{SITE.author.name}</a></span>
           </div>
         </footer>
         <WaLink className="float" msg="Hola Dr. Pietro, quisiera información." src="flotante" ariaLabel="Escribir por WhatsApp"><WaIcon /><b>WhatsApp</b></WaLink>
