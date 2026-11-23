@@ -59,7 +59,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="es" suppressHydrationWarning className={`${fraunces.variable} ${manrope.variable}`}>
       <body>
-        <link rel="preload" href="/img/logo-blanco.png" as="image" fetchPriority="high" />
+        <link rel="preload" href="/img/logo-blanco.png" as="image" crossOrigin="anonymous" fetchPriority="high" />
         <script dangerouslySetInnerHTML={{ __html: BOOT }} />
         <noscript><style>{".intro{display:none}"}</style></noscript>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(dentistLd) }} />

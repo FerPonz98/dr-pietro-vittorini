@@ -19,8 +19,10 @@ npm run build   # build de producción
 | `app/tratamientos/[slug]/page.tsx` | Una página por tratamiento (8), con su metadata, FAQ y breadcrumbs para Google |
 | `app/sitemap.ts` · `app/robots.ts` | `/sitemap.xml` y `/robots.txt` automáticos |
 | `lib/data.ts` | **Todo el contenido editable**: datos del consultorio, tratamientos, FAQ, videos |
-| `components/Intro.tsx` | Animación de entrada con el logo (una vez por sesión) |
+| `components/Intro.tsx` | Animación de entrada con el logo (solo en el inicio, una vez por sesión) |
 | `components/Motion.tsx` | Reveal al hacer scroll, barra de progreso, header que se oculta, contadores |
+| `components/Header.tsx` | Menú (en celular, panel a pantalla completa) |
+| `components/HashLink.tsx` | Links a `/#seccion` con scroll suave, también desde otras páginas |
 | `public/img` · `public/video` | Fotos y videos del doctor |
 
 ## Variables de entorno (Vercel → Settings → Environment Variables)
@@ -38,6 +40,7 @@ Con GA4 activo se registran los eventos `whatsapp_click` (con origen y tratamien
 - [ ] Enlace de reseñas de Google → `SITE.reviewUrl`
 - [ ] Fotos reales de antes y después → `public/casos/` y props `before`/`after` de `<BeforeAfter />` en `app/page.tsx`
 - [ ] Reseñas reales de Google → sección `#resenas` en `app/page.tsx`
+- [ ] ID de Google Analytics 4 → variable `NEXT_PUBLIC_GA_ID` en Vercel
 - [ ] Dominio propio + Search Console (enviar `/sitemap.xml`)
 
 ---
